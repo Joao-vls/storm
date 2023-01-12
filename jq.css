@@ -4,12 +4,147 @@
   margin: 0;
 }
 body{
-  background-color: #0e001a;
+  background-color: black;
+  color: #f1e5fd;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*#0e001a*/
+}
+a{
+  text-decoration: none;
+  color: #f1e5fd;
 }
 button{
   background: none;
   border: none;
   cursor: grab;
+}
+#principal{
+  border: 0px solid #9c27b078;
+  border-right-width: 0.1px;
+  border-left-width: 0.1px;
+  width: 600px;
+  padding-bottom: 80px;
+}
+.user-post{
+  position: relative;
+  height: 30px;
+  width: 100%;
+}
+.user-img{
+  height: 30px;
+  width: 30px;
+  background-color: white;
+  border-radius: 60px;
+  margin-top: -2px;
+  margin-left: -2%;
+}
+.user-nome{
+  position: absolute;
+  top: 0.1px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  left:29px;
+}
+.user-id{
+  font-weight: lighter;
+  font-size: 10px;
+}
+.conteu{
+  max-width: 600px;
+  min-height: 100px;
+  max-height: 660px;
+  font-size: 12px;
+  border: 0px solid #9c27b078;
+  border-top-width: 0.1px;
+  border-bottom-width: 0.1px;
+  padding: 2px 2% 2px 2%;
+}
+.imgvid-post{
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 10px;
+  max-width: 500px;
+  max-height: 500px;
+
+}
+.imgvid-u,.imgvid-p{
+  cursor: grab;
+  border: 0.5px solid #9c27b078;
+  border-radius: 20px;
+}
+.imgvid-u{
+  width: 100%;
+  max-height: 500px;
+}
+.imgvid-p{
+  width: 47.5%;
+  max-height: 200px;
+}
+.interacao{
+  margin-top: 15px;
+  width: 100%;
+  max-height: 60px;
+}
+.interacao button {
+  margin-left: 15%;
+  width: 30px;
+  height: 30px;
+  border-radius: 100px;
+  color: #9c27b0;
+}
+.interacao  button p{
+  font-size: 8px;
+  margin-top: -10px;
+  margin-left: 29px;
+}
+button[name="reacao"]:hover~.react-buttom,.react-buttom:hover{
+  display: block;
+}
+.interacao button:hover{
+  background-color: #f200ff2e;
+}
+.react{
+  position: relative;
+  float: left;
+  margin-left: 15%;
+}
+.react-buttom{
+  position: absolute;
+  display: none;
+  left: -10px;
+  top: -50%;
+  width: 60px;
+  height: 60px;
+  border-radius: 100px
+}
+.react-buttom button{
+  position: absolute;
+  width: 15px;
+  height: 15px;
+}
+button[name="coracao"]{
+  top:7%;
+  left:4%;
+}
+button[name="triste"]{
+  top: 3%;
+  left: 26%;
+}
+button[name="supresa"]{
+  top: 7%;
+  left: 49%;
+}
+button[name="alegre"]{
+  top: 29%;
+  left: 62%;
+}
+button[name="irritado"]{
+  top: 53%;
+  left: 57%;
 }
 #opca{
   position: fixed;
@@ -35,19 +170,24 @@ button{
   #opca{
     display: none;
   }
+  #novo-post{
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
-#perfil{
+#nav-menu{
   position: fixed;
   width: 100%;
   background-color: black;
   height: 40px;
   bottom: 0;
 }
-.img-perfil{
+.img-nm{
   position: absolute;
-  top: -20px;
+  top: -15px;
   left: 50%;
-  margin-left: -100px;
+  margin-left: -94px;
   width:200px;
   height:50px;
 }
@@ -60,7 +200,7 @@ button{
   border:0px solid #9c27b0;
   filter:saturate(1000%);
 }
-#perfil hr{
+#nav-menu hr{
   border-color:#9c27b0;
 }
 .img-1:hover,.img-2:hover,.img-3:hover{
@@ -68,26 +208,181 @@ button{
   border-top-width: 1px;
   border-bottom-width: 2px;
   border-right-width: 1.6px;
+  z-index: 2;
 }
 .img-1{
   left: 25%;
-  margin-left: -25px;
-  width: 50px;
-  height: 50px;
+  margin-left: -15px;
+  width: 35px;
+  height: 35px;
 }
 .img-2{
   z-index: 1;
   left: 50%;
   margin-left: -35px;
   top: -20px;
-  width: 70px;
-  height: 70px;
+  width: 55px;
+  height: 55px;
   border-left-width: 0px;
   border-top-width: 0px;
 }
 .img-3{
   left: 70%;
-  margin-left: -15px;
-  width: 50px;
-  height: 50px;
+  margin-left: -25px;
+  width: 35px;
+  height: 35px;
+}
+#novo-post{
+  position: fixed;
+  border-radius: 5px;
+  top: 10%;
+  z-index: 4;
+  width: 500px;
+  background-color: #080013;
+  border: 1px solid black;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: block;
+}
+#novo-post textarea{
+  position: absolute;
+  color: white;
+  background-color: #0d011e;
+  border: 1px solid #2f03556e;
+  border-radius: 5px;
+  width: 98%;
+  height: 70%;
+  top: 0;
+  resize: none;
+}
+#novo-post textarea:focus{
+  box-shadow: 0 0 0 0;
+  outline: 0;
+}
+#novo-post input[type="file"]{
+  display: none;
+}
+#novo-post label {
+    position: absolute;
+    bottom: 8%;
+    border-radius: 100px;
+    color: #9c27b0;
+    cursor: pointer;
+}
+.midia_envia{
+  position: absolute;
+  bottom: 2px;
+  width: 134px;
+  height: 30px;
+  left: 40px;
+}
+.mostra-midia {
+  position: relative;
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+}
+.mostra-midia img,.mostra-midia video {
+  width: 30px;
+  max-height: 30px;
+  border: 1px solid black;
+}
+.excluir-midia{
+  position: absolute;
+  left: 50%;
+  margin-left: -7.5px;
+  margin-top: -7px;
+  top: 50%;
+  border-radius:30px;
+  width: 15px;
+  height: 15px;
+  color: #9c27b0;
+  background-color:black;
+}
+.sobre-tela{
+  position: fixed;
+  bottom: 0;
+  z-index: 3;
+  width: 100%;
+  background-color: #20022954;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button[name="enviar"],button[name="cancelar_envio"]{
+  position: absolute;
+  background-color: #9c27b0;
+  border-radius: 2px;
+  bottom: 5px;
+  right: 20%;
+  height: 25px;
+  width: 10%;
+  white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+button[name="enviar"]:hover{
+  background-color: green;
+  color: white;
+}
+button[name="cancelar_envio"]:hover{
+  background-color: red;
+  color: white;
+}
+button[name="cancelar_envio"]{
+  right: 2%;
+  height: 25px;
+  width: 15%;
+  white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+/*//////////////////////////////////////////////////////*/
+.load{
+  position: fixed;
+  background-color: black;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #830d98;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+  animation: pulse 1s linear infinite;
+}
+.loader:after {
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border: 5px solid #830d98;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: scaleUp 1s linear infinite;
+}
+
+@keyframes scaleUp {
+  0% { transform: translate(-50%, -50%) scale(0) }
+  60% , 100% { transform: translate(-50%, -50%)  scale(1)}
+}
+@keyframes pulse {
+  0% , 60% , 100%{ transform:  scale(1) }
+  80% { transform:  scale(1.2)}
 }
