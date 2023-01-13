@@ -18,31 +18,68 @@ debounce = function(func, wait, immediate) {
   // $(document).on("change",$("#enviar_imvi"), function(e) {
   //
   // });
-  var imagens,post,user,carregado=0,escrito='';
+  var imagens,post,user,carregado=0,escrito='',move_lef_rig;
   //console.log(users[0].src[0][1]);
+  function criarImagemg(src){
+    var im=$('<img class="imgvid-m" src="'+src+'" alt="">');
+    criarSobretela();
+    $("body").append(im);
+  }
+  function mudarImgleft() {
+    if (move_lef_rig>0) {
+      var bl=$('<button class="pab-left" type="button" name="button"><i class="fa-solid fa-arrow-left"></i></button>');
+      $("body").append(bl);
+      $(bl).click(function(){
+        $(".imgvid-m").remove();
+        criarImagemg(imagens[move_lef_rig-=1].src);
+        mudarImgright();
+        if(move_lef_rig==0){
+          $(".pab-left").remove();
+        }
+      });
+    }
+  }
+  function mudarImgright() {
+    if (move_lef_rig<imagens.length-1) {
+      var br=$('<button class="pab-right" type="button" name="button"><i class="fa-solid fa-arrow-right"></i></button>');
+      $("body").append(br);
+      $(br).click(function(){
+        $(".imgvid-m").remove();
+        criarImagemg(imagens[move_lef_rig+=1].src);
+        mudarImgleft();
+        if(move_lef_rig==imagens.length-1){
+          $(".pab-right").css({display:"none"});
+        }
+      });
+    }
+  }
   function criarConteudo(imagem_perfil,nome_user,email,conteudo,imagens){
+
     var div=$('<div class="conteu"><div class="user-post"><img class="user-img" src="'+imagem_perfil+
     '" alt="imagem_perfil"><div class="user-nome">'+nome_user+'<div class="user-id">'+email
     +'</div></div></div><p>'+conteudo+'</p></div>');
+
     $("#principal").append(div);
+
     var pai=div;
+
     if (imagens.length) {
       var div=$('<div class="imgvid-post"></div>');
       $(pai).append(div);
+      var img;
       if(imagens.length==1){
-        var img=$('<img class="imgvid-u" src="'+imagens[0]+'" alt="">');
+        img=$('<img class="imgvid-u" src="'+imagens[0]+'" alt="">');
         $(div).append(img);
       }else {
         for (var i = 0; i < imagens.length; i++) {
-          var img=$('<img class="imgvid-p" src="'+imagens[i]+'" alt="">');
+          img=$('<img class="imgvid-p" src="'+imagens[i]+'" alt="">');
           $(div).append(img);
         }
       }
-      $(".imgvid-post img").click(function(){
-        $(this).css("background-color","red");
-      });
     }
-    div=$('<div class="interacao"><div class="react"><button type="button" name="reacao"><i class="fa-solid fa-heart-circle-plus"></i></button><div class="react-buttom"><button type="button" name="coracao"><i class="fa-solid fa-heart fa-sm"></i></button><button type="button" name="triste"><i class="fa-solid fa-face-sad-tear fa-sm"></i></button><button type="button" name="supresa"><i class="fa-solid fa-face-surprise fa-sm"></i></button><button type="button" name="alegre"><i class="fa-solid fa-face-laugh fa-sm"></i></button><button type="button" name="irritado"><i class="fa-solid fa-face-tired fa-sm"></i></button></div></div><button type="button" name="comentario"><i class="fa-solid fa-comment"></i></button><button type="button" name="compartilha"><i class="fa-solid fa-copy"></i> <p>122.222</p> </button><button type="button" name="views"><i class="fa-solid fa-eye"></i></button></div>')
+
+    div=$('<div class="interacao"><div class="react"><button type="button" name="reacao"><i class="fa-solid fa-heart-circle-plus"></i></button><div class="react-buttom"><button type="button" name="coracao"><i class="fa-solid fa-heart fa-sm"></i></button><button type="button" name="triste"><i class="fa-solid fa-face-sad-tear fa-sm"></i></button><button type="button" name="supresa"><i class="fa-solid fa-face-surprise fa-sm"></i></button><button type="button" name="alegre"><i class="fa-solid fa-face-laugh fa-sm"></i></button><button type="button" name="irritado"><i class="fa-solid fa-face-tired fa-sm"></i></button></div></div><button type="button" name="comentario"><i class="fa-solid fa-comment"></i></button><button type="button" name="compartilha"><i class="fa-solid fa-copy"></i></button><button type="button" name="views"><i class="fa-solid fa-eye"></i></button></div>')
+
     $(pai).append(div);
   }
   function criarSobretela(){
@@ -58,6 +95,9 @@ debounce = function(func, wait, immediate) {
           escrito='';
         }
         $("#novo-post").remove();
+      }
+      if($(".imgvid-m")){
+        $(".imgvid-m").remove();
       }
       $("body").css({overflow:"auto"})
       $(".sobre-tela").remove();
@@ -109,7 +149,21 @@ debounce = function(func, wait, immediate) {
       criarConteudo(user[i].image,user[i].username,user[i].email,post[i].body,imagens[i].images);
     }
     imagens.length=0;user.length=0;post.length=0;
-
+    $(".imgvid-post .imgvid-p").click(function(){
+      criarImagemg($(this).attr('src'))
+      imagens=$(this).parent().children();
+      for (var i = 0; i < imagens.length; i++) {
+        if(imagens[i].src==$(this).attr('src')){
+          move_lef_rig=i;
+        }
+      }
+      if (move_lef_rig>0) {
+      mudarImgleft();
+    }
+    if (move_lef_rig<imagens.length-1) {
+      mudarImgright();
+    }
+    });
   }
 
   function conf(){

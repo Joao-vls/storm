@@ -50,15 +50,17 @@ image
   </div>
 </div>
 
+<button class="pab-right" type="button" name="button"><i class="fa-solid fa-arrow-right"></i></button>
+<button class="pab-left" type="button" name="button"><i class="fa-solid fa-arrow-left"></i></button>
 
 
 <div class="conteu">
   <div class="user-post">
     <img class="user-img" src="img/per.png" alt="imagem_perfil">
     <div class="user-nome">
-      JOTP
+      jooooo
       <div class="user-id">
-        @joao
+        @jjojj
       </div>
     </div>
   </div>
