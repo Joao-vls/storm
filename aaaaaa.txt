@@ -41,7 +41,7 @@ image
     <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
   </div>
   <div class="mostra-midia">
-    <img src="img/per.png" alt="imagem_perfil">
+    
     <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
   </div>
   <div class="mostra-midia">
