@@ -206,6 +206,10 @@ button[name="irritado"]{
     width: 100% !important;
     height: 100% !important;
   }
+  #nav-menu button{
+    display: inline !important;
+
+  }
 }
 #nav-menu{
   position: fixed;
@@ -231,8 +235,11 @@ button[name="irritado"]{
   border:0px solid #9c27b0;
   filter:saturate(1000%);
 }
-#nav-menu{
-  color: white;
+#nav-menu button{
+  margin-top: 15px;
+  margin-left: 3%;
+  color: #9c27b0;
+  display: none;
 }
 #nav-menu hr{
   border-color:#9c27b0;

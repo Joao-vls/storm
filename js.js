@@ -16,7 +16,7 @@ debounce = function(func, wait, immediate) {
 
 (function(){
   var imagens,post,user,carregado=0,escrito='',move_lef_rig,
-  usuario=[];
+  usuarios=[],usuario=[];
 
 
   //console.log(users[0].src[0][1]);
@@ -171,12 +171,16 @@ debounce = function(func, wait, immediate) {
           $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
           $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
           $("body").css({overflow:"auto"});
-          usuario.body=$("#novo-post textarea").val();
-          usuario.imagem_p="img/per.png";
-          usuario.username="joooo";
-          usuario.email="@jjojj";
-          usuario.src=imagens;
-          criarConteudo(usuario.imagem_p,usuario.username,usuario.email,usuario.body,usuario.src,1)
+          usuarios={
+          body:$("#novo-post textarea").val(),
+          imagem_p:"img/per.png",
+          username:"joooo",
+          email:"@jjojj",
+          src:imagens
+        }
+          usuario.push(usuarios);
+          criarConteudo(usuarios.imagem_p,usuarios.username,usuarios.email,usuarios.body,usuarios.src,1);
+          imagens.length=0;
           criareventImageg();
         }
       }
@@ -216,22 +220,21 @@ debounce = function(func, wait, immediate) {
         body:post[i].body,
         src:imagens[i].images
       };
-      console.log(cont);
-      usuario.push(cont)
+      usuarios.push(cont)
     }
     for (var o = 9; o > 0; o--) {
       var j = Math.floor(Math.random() * o);
-      var aux = usuario[o];
-      usuario[o]= usuario[j];
-      usuario[j]=aux;
+      var aux = usuarios[o];
+      usuarios[o]= usuarios[j];
+      usuarios[j]=aux;
     }
     for (var i = 0; i < 10; i++) {
       //console.log(imagens[o].images.length=1,imagens[o].images);
       var li;
-      usuario[i].src.length=Math.floor(Math.random() * (li=(usuario[i].src.length<=5) ? usuario[i].src.length : imagens[i].images.length=5));
-      criarConteudo(usuario[i].imagem_p,usuario[i].nome,usuario[i].email,usuario[i].body,usuario[i].src);
+      usuarios[i].src.length=Math.floor(Math.random() * (li=(usuarios[i].src.length<=5) ? usuarios[i].src.length : usuarios[i].src.length=5));
+      criarConteudo(usuarios[i].imagem_p,usuarios[i].nome,usuarios[i].email,usuarios[i].body,usuarios[i].src);
     }
-    imagens.length=0;user.length=0;post.length=0;usuario.length=0;
+    imagens.length=0;user.length=0;post.length=0;usuarios.length=0;
     criareventImageg();
   }
 
