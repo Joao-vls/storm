@@ -200,7 +200,7 @@ debounce = function(func, wait, immediate) {
       }
       r.readAsDataURL(this.files[0]);
 
-      console.log(this.files);
+      //console.log(this.files);
       this.files.length=0;
     });
     $( "#novo-post" ).effect( "slide", 450 );
@@ -212,6 +212,8 @@ debounce = function(func, wait, immediate) {
       imagens[o]= imagens[j];
       imagens[j]=aux;
     }
+    usuarios=[];
+
     for (var i = 0; i < 10; i++) {
       var cont={
         email:user[i].email,
@@ -259,7 +261,6 @@ debounce = function(func, wait, immediate) {
       },
       success: function(data){
         imagens=data.products;
-        console.log(imagens,'i');
 
       }
     });
@@ -275,8 +276,6 @@ debounce = function(func, wait, immediate) {
       },
       success: function(data){
         post=data.posts;
-        console.log(post,'p');
-      }
     });
     $.ajax({
       method: "GET",
@@ -290,7 +289,6 @@ debounce = function(func, wait, immediate) {
       },
       success: function(data){
         user=data.users;
-        console.log(user,'u');
       }
     });
   }
@@ -307,8 +305,6 @@ debounce = function(func, wait, immediate) {
         if($(window).scrollTop()+100 + $(window).height() >= $(document).height()) {
           getAjax($(".conteu").length+'');
         }
-      }else {
-        console.log(100);
       }
     },100))
     getAjax("0");
