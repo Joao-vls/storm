@@ -276,6 +276,7 @@ debounce = function(func, wait, immediate) {
       },
       success: function(data){
         post=data.posts;
+      }
     });
     $.ajax({
       method: "GET",
