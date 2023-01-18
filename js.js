@@ -15,8 +15,7 @@ debounce = function(func, wait, immediate) {
 
 
 (function(){
-  var imagens,post,user,carregado=0,escrito='',move_lef_rig,
-  usuarios=[],usuario=[];
+  var imagens,post,user,escrito='',move_lef_rig,usuarios=[],usuario=[];
 
 
   //console.log(users[0].src[0][1]);
@@ -102,8 +101,8 @@ debounce = function(func, wait, immediate) {
       $("body").append(div);
       div.insertBefore($(".conteu:eq(0)"));
     }else{
-    $("#principal").append(div);
-  }
+      $("#principal").append(div);
+    }
     var pai=div;
 
     if (imagens2.length) {
@@ -132,13 +131,14 @@ debounce = function(func, wait, immediate) {
     $(div).effect( "slide", 450);
     $(".sobre-tela").click(function(){
       var aux;
-      if($("#novo-post")){
+      if($("#novo-post").length){
         if ($("#novo-post textarea").val()) {
           escrito=$("#novo-post textarea").val();
         }else {
           escrito='';
         }
         aux=$("#novo-post");
+        console.log(1);
         imagens.length=0;
       }
       if($(".imgvid-m").length){
@@ -147,6 +147,8 @@ debounce = function(func, wait, immediate) {
       $(".pab-right")?.remove();
       $(".pab-left")?.remove();
       $("body").css({overflow:"auto"})
+      console.log(aux);
+
       $(aux).effect( "drop", 450 ,()=>{$(aux).remove()});
       $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
 
@@ -172,12 +174,12 @@ debounce = function(func, wait, immediate) {
           $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
           $("body").css({overflow:"auto"});
           usuarios={
-          body:$("#novo-post textarea").val(),
-          imagem_p:"img/per.png",
-          username:"joooo",
-          email:"@jjojj",
-          src:imagens
-        }
+            body:$("#novo-post textarea").val(),
+            imagem_p:"img/per.png",
+            username:"joooo",
+            email:"@jjojj",
+            src:imagens
+          }
           usuario.push(usuarios);
           criarConteudo(usuarios.imagem_p,usuarios.username,usuarios.email,usuarios.body,usuarios.src,1);
           imagens.length=0;
@@ -241,73 +243,49 @@ debounce = function(func, wait, immediate) {
   }
 
   function conf(){
-    if (carregado==3) {
-      carregado=0;
-      carregaConteudo();
-      $(".load").remove();
-    }
+    carregaConteudo();
+    $(".load").remove();
   }
   function getAjax(sk){
     $.ajax({
       method: "GET",
       url: "https://dummyjson.com/products?skip="+sk+"&limit=10",
-      beforeSend: function(){
-        $('.load').css({display:"block"});
-
-      },
-      complete: function(){
-        carregado+=1;
-        conf();
-      },
       success: function(data){
         imagens=data.products;
+        $.ajax({
+          method: "GET",
+          url: "https://dummyjson.com/posts?skip="+sk+"&limit=10",
+          success: function(dat){
+            post=dat.posts;
+            $.ajax({
+              method: "GET",
+              url: "https://dummyjson.com/users?skip="+sk+"&limit=10",
+              success: function(da){
+                user=da.users;
+                conf();
+              }
+            });
+          }
+        });
+      }
+    }
+  );
+}
 
-      }
-    });
-    $.ajax({
-      method: "GET",
-      url: "https://dummyjson.com/posts?skip="+sk+"&limit=10",
-      beforeSend: function(){
-        $('.load').css({display:"block"});
-      },
-      complete: function(){
-        carregado+=1;
-        conf();
-      },
-      success: function(data){
-        post=data.posts;
-      }
-    });
-    $.ajax({
-      method: "GET",
-      url: "https://dummyjson.com/users?skip="+sk+"&limit=10",
-      beforeSend: function(){
-        $('.load').css({display:"block"});
-      },
-      complete: function(){
-        carregado+=1;
-        conf();
-      },
-      success: function(data){
-        user=data.users;
-      }
-    });
-  }
-
-  $(function(){
-    $("button").click(function(){
-      if($(this).attr('name')=="escrever"){
-        criarSobretela();
-        criarEscrever();
-      }
-    });
-    $(window).on('scroll',debounce(function(){
-      if ($(".conteu").length<100) {
-        if($(window).scrollTop()+100 + $(window).height() >= $(document).height()) {
-          getAjax($(".conteu").length+'');
-        }
-      }
-    },100))
-    getAjax("0");
+$(function(){
+  $("button").click(function(){
+    if($(this).attr('name')=="escrever" && $("#novo-post").length==0){
+      criarSobretela();
+      criarEscrever();
+    }
   });
+  $(window).on('scroll',debounce(function(){
+    if ($(".conteu").length<100) {
+      if($(window).scrollTop()+100 + $(window).height() >= $(document).height()) {
+        getAjax($(".conteu").length+'');
+      }
+    }
+  },150))
+  getAjax("0");
+});
 }());

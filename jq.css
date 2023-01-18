@@ -177,40 +177,51 @@ button[name="irritado"]{
   top: 53%;
   left: 57%;
 }
-#opca{
-  position: fixed;
-  width: 40px;
-  height: 130px;
-  bottom: 80px;
-  right: 1%;
-  border:2px solid #9c27b0;
-  background-color: black;
-}
-#opca button{
-  width: 30px;
-  height: 30px;
-  border-radius: 100px;
-  color: #9c27b0;
-  margin-left:14%;
-  margin-top: 25%;
-}
-#opca button:hover{
-  background-color: #f200ff2e;
-}
+
 @media (max-width:500px){
-  #opca{
-    display: none;
-  }
+
   #novo-post{
     top: 0 !important;
     width: 100% !important;
     height: 100% !important;
   }
-  #nav-menu button{
-    display: inline !important;
 
-  }
 }
+.opca{
+  position: absolute;
+  display: none;
+  width: 90px;
+  height: 90px;
+  border-radius: 100px;
+  left: 50%;
+  margin-left: -54px;
+  bottom: 20px;
+  background-color:#000000d1;
+}
+.opca button{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
+  color: #9c27b0;
+
+}
+.opca button:hover{
+  background-color: #f200ff2e;
+}
+button[name="escrever"]{
+  top:-15px;
+  left:32.5px;
+}
+button[name="chat"]{
+  top:8px;
+  left:62px;
+}
+button[name="notifica"]{
+  top:5px;
+  left:0px;
+}
+
 #nav-menu{
   position: fixed;
   width: 100%;
@@ -232,6 +243,7 @@ button[name="irritado"]{
   background-color: black;
   border-radius: 100px;
   cursor: grab;
+  z-index: 1;
   border:0px solid #9c27b0;
   filter:saturate(1000%);
 }
@@ -239,7 +251,6 @@ button[name="irritado"]{
   margin-top: 15px;
   margin-left: 3%;
   color: #9c27b0;
-  display: none;
 }
 #nav-menu hr{
   border-color:#9c27b0;
@@ -251,12 +262,17 @@ button[name="irritado"]{
   border-right-width: 1.6px;
   z-index: 2;
 }
+.img-2:hover ~ .opca ,.opca:hover{
+  display: block;
+
+}
 .img-1{
   left: 25%;
   margin-left: -15px;
   width: 35px;
   height: 35px;
 }
+
 .img-2{
   z-index: 1;
   left: 50%;
