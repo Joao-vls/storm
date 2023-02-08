@@ -4,7 +4,7 @@
   margin: 0;
 }
 body{
-  background-color: black;
+  background-color: black !important;
   color: #f1e5fd;
   font-family: sans-serif;
   display: flex;
@@ -57,7 +57,7 @@ button{
   max-width: 600px;
   min-height: 100px;
   max-height: 660px;
-  font-size: 12px;
+  font-size: 13px;
   border: 0px solid #9c27b078;
   border-top-width: 0.1px;
   border-bottom-width: 0.1px;
@@ -252,17 +252,76 @@ button[name="notifica"]{
   margin-left: 3%;
   color: #9c27b0;
 }
-#nav-menu hr{
+hr{
+
   border-color:#9c27b0;
+}
+.balao_perfil{
+  position:absolute;
+  width: 160px;
+  display: none;
+  height: 80px;
+  background-color: #1a0025fc;
+  right: calc(50% - -23px);
+  border-radius: 10px;
+  bottom: 66px;
+  font-size: 15px;
+}
+.balao_perfil::before{
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #7e57c2;
+  bottom: -15px;
+  left: 75%;
+}
+.balao_perfil::after{
+  content: "";
+  width: 100px;
+  height: 0;
+  position: absolute;
+  border-top: 60px solid transparent;
+  left: 30%;
+  bottom: -50px;
+
+}
+.balao_perfil .usr_ft_per{
+  background-color: red;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  float: left;
+}
+
+.lin_perfil{
+  top: 0;
+  height: 41px;
+  width: 100%;
+  position: absolute;
+}
+.lin_sair{
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  position: absolute;
 }
 .img-1:hover,.img-2:hover,.img-3:hover{
   border-left-width: 0.5px;
   border-top-width: 1px;
   border-bottom-width: 2px;
   border-right-width: 1.6px;
-  z-index: 2;
+  z-index: 3;
 }
-.img-2:hover ~ .opca ,.opca:hover{
+img[name="ir_home"]:hover ~ .opca ,.opca:hover{
+  transition: 5s;
+
+  display: block;
+
+}
+img[name="ir_perfil"]:hover ~ .balao_perfil,.balao_perfil:hover{
   display: block;
 
 }
@@ -274,7 +333,7 @@ button[name="notifica"]{
 }
 
 .img-2{
-  z-index: 1;
+  z-index: 2;
   left: 50%;
   margin-left: -35px;
   top: -20px;
@@ -309,7 +368,7 @@ button[name="notifica"]{
   background-color: #0d011e;
   border: 1px solid #2f03556e;
   border-radius: 5px;
-  width: 98%;
+  width: calc(100% - 2px);
   height: 70%;
   top: 0;
   resize: none;

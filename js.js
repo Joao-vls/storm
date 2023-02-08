@@ -138,7 +138,6 @@ debounce = function(func, wait, immediate) {
           escrito='';
         }
         aux=$("#novo-post");
-        console.log(1);
         imagens.length=0;
       }
       if($(".imgvid-m").length){
@@ -156,120 +155,148 @@ debounce = function(func, wait, immediate) {
   }
 
   function criarEscrever(){
-    var div=$('<div id="novo-post"> <textarea name="texto" placeholder="Escreva aqui..."></textarea><label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label><input id="enviar_imvi" type="file" accept="image/*" capture="user"><button type="button" name="enviar" >Enviar</button> <button type="button" name="cancelar_envio" >Cancelar</button></div>');
+    var div=$('<div id="novo-post"><form class="" id="formenviacont" method="post"> <textarea name="texto" placeholder="Escreva aqui..."></textarea><label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label><input multiple id="enviar_imvi" type="file" accept="image/*" capture="user"><button type="submit" name="enviar" >Enviar</button> <button type="button" name="cancelar_envio" >Cancelar</button</form></div>');
     $("body").append(div);
     if (escrito) {
       $("#novo-post textarea").val(escrito);
     }
-    $("#novo-post button").click(
-      function(){
-        if ($(this).attr('name')=="cancelar_envio") {
-          $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
-          $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
-          $("body").css({overflow:"auto"});
-          imagens.length=0;
-        }
-        if ($(this).attr('name')=="enviar") {
-          $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
-          $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
-          $("body").css({overflow:"auto"});
-          usuarios={
-            body:$("#novo-post textarea").val(),
-            imagem_p:"img/per.png",
-            username:"joooo",
-            email:"@jjojj",
-            src:imagens
-          }
-          usuario.push(usuarios);
-          criarConteudo(usuarios.imagem_p,usuarios.username,usuarios.email,usuarios.body,usuarios.src,1);
-          imagens.length=0;
-          criareventImageg();
+    $("#formenviacont").submit((e)=>{
+      e.preventDefault();
+      var body_t=$("#novo-post textarea").val();
+      input = $('#novo-post input[type="file"]')[0];
+      var formData = new FormData();
+      
+      formData.append('body',body_t);
+      if(input.files.length){
+
+        for (var i = 0; i < input.files.length; i++) {
+          formData.append('arquivo',input.files[i]);
         }
       }
-    );
-    $("#enviar_imvi").on("change", function() {
-      if (!( this.files && this.files[0]) || imagens.length==4) {
-        return;
-      }
-      var r = new FileReader();
-      criarMostramid();
-      r.onload = function(e){
-        if (imagens.length<4) {
-          imagens.push(e.target.result);
-          var div=$('<img src="'+imagens[$(".mostra-midia").length-1]+'" alt="imagem_perfil">');
-          $(".mostra-midia:eq("+($(".mostra-midia").length-1)+")").append(div)
+      $.ajax({
+        url: 'recebepost.php',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+          console.log('Dados enviados com sucesso!');
         }
+      });
+
+    }
+  );
+  $("#novo-post button").click(
+    function(){
+      if ($(this).attr('name')=="cancelar_envio") {
+        $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
+        $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
+        $("body").css({overflow:"auto"});
+        imagens.length=0;
       }
-      r.readAsDataURL(this.files[0]);
-
-      //console.log(this.files);
-      this.files.length=0;
-    });
-    $( "#novo-post" ).effect( "slide", 450 );
-  }
-  function carregaConteudo(){
-    for (var o = imagens.length - 1; o > 0; o--) {
-      var j = Math.floor(Math.random() * o);
-      var aux = imagens[o];
-      imagens[o]= imagens[j];
-      imagens[j]=aux;
-    }
-    usuarios=[];
-
-    for (var i = 0; i < 10; i++) {
-      var cont={
-        email:user[i].email,
-        nome:user[i].username,
-        imagem_p:user[i].image,
-        body:post[i].body,
-        src:imagens[i].images
-      };
-      usuarios.push(cont)
-    }
-    for (var o = 9; o > 0; o--) {
-      var j = Math.floor(Math.random() * o);
-      var aux = usuarios[o];
-      usuarios[o]= usuarios[j];
-      usuarios[j]=aux;
-    }
-    for (var i = 0; i < 10; i++) {
-      //console.log(imagens[o].images.length=1,imagens[o].images);
-      var li;
-      usuarios[i].src.length=Math.floor(Math.random() * (li=(usuarios[i].src.length<=5) ? usuarios[i].src.length : usuarios[i].src.length=5));
-      criarConteudo(usuarios[i].imagem_p,usuarios[i].nome,usuarios[i].email,usuarios[i].body,usuarios[i].src);
-    }
-    imagens.length=0;user.length=0;post.length=0;usuarios.length=0;
-    criareventImageg();
-  }
-
-  function conf(){
-    carregaConteudo();
-    $(".load").remove();
-  }
-  function getAjax(sk){
-    $.ajax({
-      method: "GET",
-      url: "https://dummyjson.com/products?skip="+sk+"&limit=10",
-      success: function(data){
-        imagens=data.products;
-        $.ajax({
-          method: "GET",
-          url: "https://dummyjson.com/posts?skip="+sk+"&limit=10",
-          success: function(dat){
-            post=dat.posts;
-            $.ajax({
-              method: "GET",
-              url: "https://dummyjson.com/users?skip="+sk+"&limit=10",
-              success: function(da){
-                user=da.users;
-                conf();
-              }
-            });
-          }
-        });
+      if ($(this).attr('name')=="enviar") {
+        $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
+        $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
+        $("body").css({overflow:"auto"});
+        usuarios={
+          body:$("#novo-post textarea").val(),
+          imagem_p:"img/per.png",
+          username:"nome",
+          email:"@id",
+          src:imagens
+        }
+        usuario.push(usuarios);
+        criarConteudo(usuarios.imagem_p,usuarios.username,usuarios.email,usuarios.body,usuarios.src,1);
+        imagens.length=0;
+        criareventImageg();
       }
     }
   );
+  $("#enviar_imvi").on("change", function() {
+    if (!( this.files && this.files.length<=4) || imagens.length==4) {
+      return;
+    }
+
+    if (this.files.length<=4) {
+      for (var i = 0; i <this.files.length ; i++) {
+        var r = new FileReader();
+        r.readAsDataURL(this.files[i]);
+        r.onload = function(e){
+          if (imagens.length<4) {
+            criarMostramid();
+            imagens.push(e.target.result);
+            var div=$('<img src="'+imagens[$(".mostra-midia").length-1]+'" alt="imagem_perfil">');
+            $(".mostra-midia:eq("+($(".mostra-midia").length-1)+")").append(div)
+          }
+        }
+      }
+    }
+  });
+  $( "#novo-post" ).effect( "slide", 450 );
+}
+function carregaConteudo(){
+  for (var o = imagens.length - 1; o > 0; o--) {
+    var j = Math.floor(Math.random() * o);
+    var aux = imagens[o];
+    imagens[o]= imagens[j];
+    imagens[j]=aux;
+  }
+  usuarios=[];
+
+  for (var i = 0; i < 10; i++) {
+    var cont={
+      email:user[i].email,
+      nome:user[i].username,
+      imagem_p:user[i].image,
+      body:post[i].body,
+      src:imagens[i].images
+    };
+    usuarios.push(cont)
+  }
+  for (var o = 9; o > 0; o--) {
+    var j = Math.floor(Math.random() * o);
+    var aux = usuarios[o];
+    usuarios[o]= usuarios[j];
+    usuarios[j]=aux;
+  }
+  for (var i = 0; i < 10; i++) {
+    //console.log(imagens[o].images.length=1,imagens[o].images);
+    var li;
+    usuarios[i].src.length=Math.floor(Math.random() * (li=(usuarios[i].src.length<=5) ? usuarios[i].src.length : usuarios[i].src.length=5));
+    criarConteudo(usuarios[i].imagem_p,usuarios[i].nome,usuarios[i].email,usuarios[i].body,usuarios[i].src);
+  }
+  imagens.length=0;user.length=0;post.length=0;usuarios.length=0;
+  criareventImageg();
+}
+
+function conf(){
+  carregaConteudo();
+  $(".load").remove();
+}
+function getAjax(sk){
+  $.ajax({
+    method: "GET",
+    url: "https://dummyjson.com/products?skip="+sk+"&limit=10",
+    success: function(data){
+      imagens=data.products;
+      $.ajax({
+        method: "GET",
+        url: "https://dummyjson.com/posts?skip="+sk+"&limit=10",
+        success: function(dat){
+          post=dat.posts;
+          $.ajax({
+            method: "GET",
+            url: "https://dummyjson.com/users?skip="+sk+"&limit=10",
+            success: function(da){
+              user=da.users;
+              conf();
+            }
+          });
+        }
+      });
+    }
+  }
+);
 }
 
 $(function(){

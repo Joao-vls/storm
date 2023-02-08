@@ -1,0 +1,186 @@
+<div class="sobre-tela">
+</div>
+
+
+
+"<div id="novo-post">
+  <textarea name="texto" placeholder="Escreva aqui..."></textarea>
+  <label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label>
+  <input id="enviar_imvi" type="file" accept="image/*,video/*" capture="user">
+  <button type="button" name="enviar" >Enviar</button>
+  <button type="button" name="cancelar" >Cancelar</button>
+</div>"
+
+
+var users=[{
+  id:"",
+  nome:"",
+  body:"",
+  src:""
+}];
+{
+  id:"",
+  nome:"",
+  body:"",
+  src:["44","777"]
+}
+
+email
+userName
+images
+body
+image
+
+
+<div class="midia_envia">
+  <div class="mostra-midia" >
+    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
+  </div>
+  <div class="mostra-midia">
+    <img src="img/per.png" alt="imagem_perfil">
+    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
+  </div>
+  <div class="mostra-midia">
+    
+    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
+  </div>
+  <div class="mostra-midia">
+    <img src="img/per.png" alt="imagem_perfil">
+    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
+  </div>
+</div>
+
+<button class="pab-right" type="button" name="button"><i class="fa-solid fa-arrow-right"></i></button>
+<button class="pab-left" type="button" name="button"><i class="fa-solid fa-arrow-left"></i></button>
+
+
+<div class="conteu">
+  <div class="user-post">
+    <img class="user-img" src="img/per.png" alt="imagem_perfil">
+    <div class="user-nome">
+      jooooo
+      <div class="user-id">
+        @jjojj
+      </div>
+    </div>
+  </div>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <div class="imgvid-post">
+  </div>
+
+  <div class="interacao">
+    <div class="react">
+      <button type="button" name="reacao"><i class="fa-solid fa-heart-circle-plus"></i></button>
+      <div class="react-buttom">
+        <button type="button" name="coracao"><i class="fa-solid fa-heart fa-sm"></i></button>
+        <button type="button" name="triste"><i class="fa-solid fa-face-sad-tear fa-sm"></i></button>
+        <button type="button" name="supresa"><i class="fa-solid fa-face-surprise fa-sm"></i></button>
+        <button type="button" name="alegre"><i class="fa-solid fa-face-laugh fa-sm"></i></button>
+        <button type="button" name="irritado"><i class="fa-solid fa-face-tired fa-sm"></i></button>
+      </div>
+    </div>
+    <button type="button" name="comentario"><i class="fa-solid fa-comment"></i></button>
+    <button type="button" name="compartilha"><i class="fa-solid fa-copy"></i> <p>122.222</p> </button>
+    <button type="button" name="views"><i class="fa-solid fa-eye"></i></button>
+  </div>
+</div>
+
+<div class="imgvid-post">
+  <img class="imgvid-u"src="img/parafuso.png" alt="">
+
+</div>
+<div class="imgvid-post">
+  <img class="imgvid-p"src="img/parafuso.png" alt="">
+  <img class="imgvid-p"src="img/parafuso.png" alt="">
+  <img class="imgvid-p"src="img/parafuso.png" alt="">
+  <img class="imgvid-p"src="img/parafuso.png" alt="">
+
+</div>
+function conf(){
+  if (carregado==3) {
+    var cont,u=0;
+    for (var i = 0; i < 20; i++) {
+      u=(u==9) ? 0 : u+1;
+      cont={
+        id:user[u].email,
+        nome:user[u].name,
+        body:post[u].body,
+        src:""
+      };
+      users.push(cont)
+    }
+    for (var i = 0; i < 10; i++) {
+      cont={
+        id:user[9-i].email,
+        nome:user[9-i].name,
+        body:post[9-i].body,
+        src:imagens[i].url
+      };
+      users.push(cont)
+    }
+    for (var i = 0; i < 10; i++) {
+      cont={
+        id:user[i].email,
+        nome:user[i].name,
+        body:post[i].body,
+        src:[imagens[i].url,imagens[20-i].url,imagens[30-i].url,imagens[40-i].url]
+      };
+      users.push(cont)
+    }
+    for (var i = users.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * i);
+      var aux = users[i];
+      users[i]= users[j];
+      users[j]=aux;
+    }
+    $(".load").remove();
+  }
+}
+
+$.ajax({
+  method: "GET",
+  url: "https://jsonplaceholder.typicode.com/photos?albumId=1",
+  beforeSend: function(){
+    $('.load').css({display:"block"});
+
+  },
+  complete: function(){
+    carregado+=1;
+    conf();
+  },
+  success: function(data){
+    console.log(data[0].url);
+    imagens=data;
+    console.log(imagens);
+  }
+});
+$.ajax({
+  method: "GET",
+  url: "https://jsonplaceholder.typicode.com/posts?userId=1",
+  beforeSend: function(){
+    $('.load').css({display:"block"});
+  },
+  complete: function(){
+    carregado+=1;
+    conf();
+  },
+  success: function(data){
+    post=data;
+    console.log(post);
+  }
+});
+$.ajax({
+  method: "GET",
+  url: "https://jsonplaceholder.typicode.com/users",
+  beforeSend: function(){
+    $('.load').css({display:"block"});
+  },
+  complete: function(){
+    carregado+=1;
+    conf();
+  },
+  success: function(data){
+    user=data;
+    console.log(user);
+  }
+});
