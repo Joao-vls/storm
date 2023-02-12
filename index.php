@@ -3,8 +3,6 @@ include "banco.php";
 if(!isset($_SESSION)){
   session_start();
 }
-//session_destroy();
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,12 +34,12 @@ if(!isset($_SESSION)){
 
       <img class="img-1" src="img/per.png" name="ir_perfil" alt="perfil">
       <?php
-      if (isset($_SESSION['emailnu'])){
+      if (isset($_SESSION['id_s'])){
         echo '<div class="balao_perfil">
-        <a href="#" class="lin_perfil"><img class="usr_ft_per" src="'.$_SESSION['imgper'].'" alt="">'.$_SESSION['nome'].'</br>@'.$_SESSION['id_name'].'</a>
+        <a href="user.php" class="lin_perfil"><img class="usr_ft_per" src="'.$_SESSION['imgper'].'" alt=""><p>'.$_SESSION['nome'].'</p><p>@'.$_SESSION['id_name'].'</p></a>
         <div class="lin_sair">
         <hr>
-        <a href="!#">
+        <a href="sair.php">
         <i class="fa-solid fa-door-open"></i>sair</a>
         </div>
         </div>';
@@ -50,7 +48,7 @@ if(!isset($_SESSION)){
       <img class="img-2" src="img/parafuso.png" name="ir_home" alt="principal">
 
       <?php
-      if (isset($_SESSION['emailnu'])){
+      if (isset($_SESSION['id_s'])){
         echo '<nav class="opca">
         <button type="button" name="notifica"><i class="fa-solid fa-bell fa-lg"></i></button>
         <button type="button" name="escrever"><i class="fa-solid fa-pen-to-square fa-lg"></i></button>

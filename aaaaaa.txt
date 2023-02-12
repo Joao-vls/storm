@@ -41,7 +41,7 @@ image
     <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
   </div>
   <div class="mostra-midia">
-    
+
     <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
   </div>
   <div class="mostra-midia">
@@ -184,3 +184,45 @@ $.ajax({
     console.log(user);
   }
 });
+
+$imagem = $_FILES["arquivo"]["tmp_name"];
+
+// processamento da imagem...
+
+header("Content-Type: image/jpeg");
+header("Content-Type: text/plain");
+echo base64_encode(file_get_contents($imagem));
+
+
+$coma="INSERT INTO posts (id_post, nome, id_nome,tipo,body,date_post,img_perfil) VALUES (:idp, " . $result['nome']. ",".$result['id_nome'].",p,:bod,:datc,".$result['img_perfil'].")";
+$novopos=$my_Db_Connection->prepare($coma);
+$idpos=uniqid().'p'.rand(1,1000).'p'.uniqid();
+$novopos->bindParam(':idp',$idpos);
+//$novopos->bindParam(':nom',);
+//$novopos->bindParam(':idno',);
+$novopos->bindParam(':bod',$_POST['body']);
+$data = new DateTime();
+$data=$data->format('Y/m/d H:i');
+$novopos->bindParam(':datc',$data);
+//$novopos->bindParam(':imgp',);
+$novopos->execute();
+if(isset($_FILES['arquivo'])){
+  $img=$_FILES['arquivo'];
+  if($img['error']){
+    die("erro ao salvar imagem");
+  }
+  $locals="img/";
+  $nome_img=uniqid();
+  $tipo=strtolower(pathinfo($img['name'],PATHINFO_EXTENSION));
+  if ($tipo != "jpg" && $tipo!= "png") {
+    die("formato de imagem nao permitida");
+  }
+  $locals=$locals . $nome_img . '.' . $tipo;
+  $img_ok= move_uploaded_file($img['tmp_name'],$locals);
+
+  if ($img_ok) {
+    $my_Insert_Statement = $my_Db_Connection->prepare("INSERT INTO arquivos (id_post,nome_arq,caminho) VALUES (:idp,:noar,:cam)");
+    $my_Insert_Statement->bindParam(':cam', $locals);
+    $my_Insert_Statement->bindParam(':noar', $nome_img);
+    $my_Insert_Statement->bindParam(':idp', $idpos);
+    $my_Insert_Statement->execute();

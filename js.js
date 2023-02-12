@@ -155,34 +155,42 @@ debounce = function(func, wait, immediate) {
   }
 
   function criarEscrever(){
-    var div=$('<div id="novo-post"><form class="" id="formenviacont" method="post"> <textarea name="texto" placeholder="Escreva aqui..."></textarea><label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label><input multiple id="enviar_imvi" type="file" accept="image/*" capture="user"><button type="submit" name="enviar" >Enviar</button> <button type="button" name="cancelar_envio" >Cancelar</button</form></div>');
+    var div=$('<div id="novo-post"><form class=""id="formenviacont" method="post"> <textarea name="texto" placeholder="Escreva aqui..."></textarea><label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label><input name="arquivo[]" multiple id="enviar_imvi" type="file" accept="image/*" capture="user"><button type="submit" name="enviar" >Enviar</button> <button type="button" name="cancelar_envio" >Cancelar</button</form></div>');
     $("body").append(div);
     if (escrito) {
       $("#novo-post textarea").val(escrito);
     }
-    $("#formenviacont").submit((e)=>{
+    $("#formenviacont").submit(function(e){
       e.preventDefault();
-      var body_t=$("#novo-post textarea").val();
-      input = $('#novo-post input[type="file"]')[0];
-      var formData = new FormData();
-      
-      formData.append('body',body_t);
-      if(input.files.length){
-
-        for (var i = 0; i < input.files.length; i++) {
-          formData.append('arquivo',input.files[i]);
-        }
-      }
+      var recdata;
+      var formData = new FormData(this);
+      formData.append('reqpos',"2");
       $.ajax({
-        url: 'recebepost.php',
         type: 'POST',
+        url: 'GPvar.php',
         data: formData,
         processData: false,
         contentType: false,
+        cache: false,
         success: function(data) {
-          console.log('Dados enviados com sucesso!');
+          recdata = data;
+          console.log(recdata);
+          $.ajax({
+            url: 'GPvar.php',
+            type: 'GET',
+            data: { reqget: "1"},
+            dataType:'json',
+            success: function(data) {
+              recdata=data;
+              console.log(recdata);
+            }
+          });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR, textStatus, errorThrown);
         }
       });
+
 
     }
   );
@@ -235,38 +243,41 @@ debounce = function(func, wait, immediate) {
   $( "#novo-post" ).effect( "slide", 450 );
 }
 function carregaConteudo(){
-  for (var o = imagens.length - 1; o > 0; o--) {
-    var j = Math.floor(Math.random() * o);
-    var aux = imagens[o];
-    imagens[o]= imagens[j];
-    imagens[j]=aux;
-  }
-  usuarios=[];
+  if (imagens.length && user.length && post.length){
 
-  for (var i = 0; i < 10; i++) {
-    var cont={
-      email:user[i].email,
-      nome:user[i].username,
-      imagem_p:user[i].image,
-      body:post[i].body,
-      src:imagens[i].images
-    };
-    usuarios.push(cont)
+    for (var o = imagens.length - 1; o > 0; o--) {
+      var j = Math.floor(Math.random() * o);
+      var aux = imagens[o];
+      imagens[o]= imagens[j];
+      imagens[j]=aux;
+    }
+    usuarios=[];
+
+    for (var i = 0; i < 10; i++) {
+      var cont={
+        email:user[i].email,
+        nome:user[i].username,
+        imagem_p:user[i].image,
+        body:post[i].body,
+        src:imagens[i].images
+      };
+      usuarios.push(cont)
+    }
+    for (var o = 9; o > 0; o--) {
+      var j = Math.floor(Math.random() * o);
+      var aux = usuarios[o];
+      usuarios[o]= usuarios[j];
+      usuarios[j]=aux;
+    }
+    for (var i = 0; i < 10; i++) {
+      //console.log(imagens[o].images.length=1,imagens[o].images);
+      var li;
+      usuarios[i].src.length=Math.floor(Math.random() * (li=(usuarios[i].src.length<=5) ? usuarios[i].src.length : usuarios[i].src.length=5));
+      criarConteudo(usuarios[i].imagem_p,usuarios[i].nome,usuarios[i].email,usuarios[i].body,usuarios[i].src);
+    }
+    imagens.length=0;user.length=0;post.length=0;usuarios.length=0;
+    criareventImageg();
   }
-  for (var o = 9; o > 0; o--) {
-    var j = Math.floor(Math.random() * o);
-    var aux = usuarios[o];
-    usuarios[o]= usuarios[j];
-    usuarios[j]=aux;
-  }
-  for (var i = 0; i < 10; i++) {
-    //console.log(imagens[o].images.length=1,imagens[o].images);
-    var li;
-    usuarios[i].src.length=Math.floor(Math.random() * (li=(usuarios[i].src.length<=5) ? usuarios[i].src.length : usuarios[i].src.length=5));
-    criarConteudo(usuarios[i].imagem_p,usuarios[i].nome,usuarios[i].email,usuarios[i].body,usuarios[i].src);
-  }
-  imagens.length=0;user.length=0;post.length=0;usuarios.length=0;
-  criareventImageg();
 }
 
 function conf(){
@@ -300,12 +311,19 @@ function getAjax(sk){
 }
 
 $(function(){
+
   $("button").click(function(){
     if($(this).attr('name')=="escrever" && $("#novo-post").length==0){
       criarSobretela();
       criarEscrever();
     }
   });
+  if (!$(".balao_perfil").length) {
+    $(".img-1").click(()=>{
+      window.location.href="http://localhost/storm/login.php";
+    });
+  }
+
   $(window).on('scroll',debounce(function(){
     if ($(".conteu").length<100) {
       if($(window).scrollTop()+100 + $(window).height() >= $(document).height()) {

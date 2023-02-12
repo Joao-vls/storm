@@ -3,7 +3,6 @@ if(!isset($_SESSION)){
   session_start();
 }
 if (isset($_SESSION['id_s'])) {
-  echo json_encode(['id_name'=>$_SESSION['id_name']],['id_na'=>$_SESSION['id_name']]);
   header("location:index.php");
 }
 
@@ -54,7 +53,7 @@ if (isset($_GET['Login_emailnu']) && $_GET['Login_emailnu']!=""
 <head>
   <meta charset="utf-8">
   <title>Storm</title>
-  <script type="text/javascript" src="jquery-3.6.2.js"></script>
+  <script type="text/javascript" src="jquery/jquery-3.6.2.js"></script>
   <script src="https://kit.fontawesome.com/9f72a03fbd.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="login.css">
   <link rel="stylesheet" href="jq.css">
