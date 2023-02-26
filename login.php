@@ -2,8 +2,9 @@
 if(!isset($_SESSION)){
   session_start();
 }
-if (isset($_SESSION['id_s'])) {
+if (isset($_SESSION['id_nome'])) {
   header("location:index.php");
+  exit();
 }
 
 if (isset($_GET['Login_emailnu']) && $_GET['Login_emailnu']!=""
@@ -13,35 +14,36 @@ if (isset($_GET['Login_emailnu']) && $_GET['Login_emailnu']!=""
 
   $usr['emailnu'] =$my_Db_Connection->quote($_GET['Login_emailnu']);
   $usr['senha']= $_GET['Login_senha'];
-  $sql_bus="SELECT * FROM users WHERE email_numero = ".$usr['emailnu']."";
+  $sql_bus="SELECT id_nome, email_numero, img_perfil,nome,senha FROM users WHERE email_numero = ".$usr['emailnu']."";
   $bus = $my_Db_Connection->prepare($sql_bus);
   $bus->execute();
   $count = $bus->rowCount();
+
   if ($count == 1) {
     $result = $bus->fetch(PDO::FETCH_ASSOC);
     if(password_verify($usr['senha'],$result['senha'])){
-      $_SESSION['id_s']=uniqid().'s'.rand(1,1000).'s'.uniqid();
-      $_SESSION['emailnu']=$result['email_numero'];
-      $_SESSION['id_name']=$result['id_nome'];
-      $_SESSION['nome']=$result['nome'];
-      $_SESSION['imgper']=$result['img_perfil'];
-      $_SESSION['idade']=$result['idade'];
-      $_SESSION['diacadas']=$result['dia_cadastro'];
+      unset($result['senha']);
+      $_SESSION=array_merge($_SESSION, $result);
+      //die(print_r($_SESSION));
+      //$_SESSION['id_s']=uniqid().'s'.rand(1,1000).'s'.uniqid();
+      date_default_timezone_set('America/Sao_Paulo');
       $data = new DateTime();
       $data=$data->format('Y/m/d H:i');
-      $bus = $my_Db_Connection->prepare("UPDATE users SET login_date = :lda, id_session = :ids WHERE email_numero = :id");
+      $bus = $my_Db_Connection->prepare("UPDATE users join info_users on users.id_nome=info_users.user_id_nome SET info_users.login_date = :lda WHERE users.id_nome= :id");
       $bus->bindParam(':lda', $data);
-      $bus->bindParam(':id', $result['email_numero']);
-      $bus->bindParam(':ids', $_SESSION['id_s']);
+      $bus->bindParam(':id', $result['id_nome']);
       if($bus->execute()){
         header("location:index.php");
+        exit();
       }else {
         header("location:login.php");
+        exit();
       }
     }
 
   } else {
     header("location:login.php");
+    exit();
   }
 
 

@@ -3,26 +3,27 @@
 
 
 
+
 "<div id="novo-post">
-  <textarea name="texto" placeholder="Escreva aqui..."></textarea>
-  <label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label>
-  <input id="enviar_imvi" type="file" accept="image/*,video/*" capture="user">
-  <button type="button" name="enviar" >Enviar</button>
-  <button type="button" name="cancelar" >Cancelar</button>
+<textarea name="texto" placeholder="Escreva aqui..."></textarea>
+<label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label>
+<input id="enviar_imvi" type="file" accept="image/*,video/*" capture="user">
+<button type="button" name="enviar" >Enviar</button>
+<button type="button" name="cancelar" >Cancelar</button>
 </div>"
 
 
 var users=[{
-  id:"",
-  nome:"",
-  body:"",
-  src:""
+id:"",
+nome:"",
+body:"",
+src:""
 }];
 {
-  id:"",
-  nome:"",
-  body:"",
-  src:["44","777"]
+id:"",
+nome:"",
+body:"",
+src:["44","777"]
 }
 
 email
@@ -33,156 +34,157 @@ image
 
 
 <div class="midia_envia">
-  <div class="mostra-midia" >
-    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
-  </div>
-  <div class="mostra-midia">
-    <img src="img/per.png" alt="imagem_perfil">
-    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
-  </div>
-  <div class="mostra-midia">
-
-    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
-  </div>
-  <div class="mostra-midia">
-    <img src="img/per.png" alt="imagem_perfil">
-    <button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
-  </div>
+<div class="mostra-midia" >
+<button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
 </div>
+<div class="mostra-midia">
+<img src="img/per.png" alt="imagem_perfil">
+<button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
+</div>
+<div class="mostra-midia">
+
+<button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
+</div>
+<div class="mostra-midia">
+<img src="img/per.png" alt="imagem_perfil">
+<button type="button" name="button" class="excluir-midia"><i class="fa-solid fa-circle-xmark fa-sm"></i></button>
+</div>
+</div>
+
 
 <button class="pab-right" type="button" name="button"><i class="fa-solid fa-arrow-right"></i></button>
 <button class="pab-left" type="button" name="button"><i class="fa-solid fa-arrow-left"></i></button>
 
 
 <div class="conteu">
-  <div class="user-post">
-    <img class="user-img" src="img/per.png" alt="imagem_perfil">
-    <div class="user-nome">
-      jooooo
-      <div class="user-id">
-        @jjojj
-      </div>
-    </div>
-  </div>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  <div class="imgvid-post">
-  </div>
+<div class="user-post">
+<img class="user-img" src="img/per.png" alt="imagem_perfil">
+<div class="user-nome">
+jooooo
+<div class="user-id">
+@jjojj
+</div>
+</div>
+</div>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<div class="imgvid-post">
+</div>
 
-  <div class="interacao">
-    <div class="react">
-      <button type="button" name="reacao"><i class="fa-solid fa-heart-circle-plus"></i></button>
-      <div class="react-buttom">
-        <button type="button" name="coracao"><i class="fa-solid fa-heart fa-sm"></i></button>
-        <button type="button" name="triste"><i class="fa-solid fa-face-sad-tear fa-sm"></i></button>
-        <button type="button" name="supresa"><i class="fa-solid fa-face-surprise fa-sm"></i></button>
-        <button type="button" name="alegre"><i class="fa-solid fa-face-laugh fa-sm"></i></button>
-        <button type="button" name="irritado"><i class="fa-solid fa-face-tired fa-sm"></i></button>
-      </div>
-    </div>
-    <button type="button" name="comentario"><i class="fa-solid fa-comment"></i></button>
-    <button type="button" name="compartilha"><i class="fa-solid fa-copy"></i> <p>122.222</p> </button>
-    <button type="button" name="views"><i class="fa-solid fa-eye"></i></button>
-  </div>
+<div class="interacao">
+<div class="react">
+<button type="button" name="reacao"><i class="fa-solid fa-heart-circle-plus"></i></button>
+<div class="react-buttom">
+<button type="button" name="coracao"><i class="fa-solid fa-heart fa-sm"></i></button>
+<button type="button" name="triste"><i class="fa-solid fa-face-sad-tear fa-sm"></i></button>
+<button type="button" name="supresa"><i class="fa-solid fa-face-surprise fa-sm"></i></button>
+<button type="button" name="alegre"><i class="fa-solid fa-face-laugh fa-sm"></i></button>
+<button type="button" name="irritado"><i class="fa-solid fa-face-tired fa-sm"></i></button>
+</div>
+</div>
+<button type="button" name="comentario"><i class="fa-solid fa-comment"></i></button>
+<button type="button" name="compartilha"><i class="fa-solid fa-copy"></i> <p>122.222</p> </button>
+<button type="button" name="views"><i class="fa-solid fa-eye"></i></button>
+</div>
 </div>
 
 <div class="imgvid-post">
-  <img class="imgvid-u"src="img/parafuso.png" alt="">
+<img class="imgvid-u"src="img/parafuso.png" alt="">
 
 </div>
 <div class="imgvid-post">
-  <img class="imgvid-p"src="img/parafuso.png" alt="">
-  <img class="imgvid-p"src="img/parafuso.png" alt="">
-  <img class="imgvid-p"src="img/parafuso.png" alt="">
-  <img class="imgvid-p"src="img/parafuso.png" alt="">
+<img class="imgvid-p"src="img/parafuso.png" alt="">
+<img class="imgvid-p"src="img/parafuso.png" alt="">
+<img class="imgvid-p"src="img/parafuso.png" alt="">
+<img class="imgvid-p"src="img/parafuso.png" alt="">
 
 </div>
 function conf(){
-  if (carregado==3) {
-    var cont,u=0;
-    for (var i = 0; i < 20; i++) {
-      u=(u==9) ? 0 : u+1;
-      cont={
-        id:user[u].email,
-        nome:user[u].name,
-        body:post[u].body,
-        src:""
-      };
-      users.push(cont)
-    }
-    for (var i = 0; i < 10; i++) {
-      cont={
-        id:user[9-i].email,
-        nome:user[9-i].name,
-        body:post[9-i].body,
-        src:imagens[i].url
-      };
-      users.push(cont)
-    }
-    for (var i = 0; i < 10; i++) {
-      cont={
-        id:user[i].email,
-        nome:user[i].name,
-        body:post[i].body,
-        src:[imagens[i].url,imagens[20-i].url,imagens[30-i].url,imagens[40-i].url]
-      };
-      users.push(cont)
-    }
-    for (var i = users.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * i);
-      var aux = users[i];
-      users[i]= users[j];
-      users[j]=aux;
-    }
-    $(".load").remove();
-  }
+if (carregado==3) {
+var cont,u=0;
+for (var i = 0; i < 20; i++) {
+u=(u==9) ? 0 : u+1;
+cont={
+id:user[u].email,
+nome:user[u].name,
+body:post[u].body,
+src:""
+};
+users.push(cont)
+}
+for (var i = 0; i < 10; i++) {
+cont={
+id:user[9-i].email,
+nome:user[9-i].name,
+body:post[9-i].body,
+src:imagens[i].url
+};
+users.push(cont)
+}
+for (var i = 0; i < 10; i++) {
+cont={
+id:user[i].email,
+nome:user[i].name,
+body:post[i].body,
+src:[imagens[i].url,imagens[20-i].url,imagens[30-i].url,imagens[40-i].url]
+};
+users.push(cont)
+}
+for (var i = users.length - 1; i > 0; i--) {
+var j = Math.floor(Math.random() * i);
+var aux = users[i];
+users[i]= users[j];
+users[j]=aux;
+}
+$(".load").remove();
+}
 }
 
 $.ajax({
-  method: "GET",
-  url: "https://jsonplaceholder.typicode.com/photos?albumId=1",
-  beforeSend: function(){
-    $('.load').css({display:"block"});
+method: "GET",
+url: "https://jsonplaceholder.typicode.com/photos?albumId=1",
+beforeSend: function(){
+$('.load').css({display:"block"});
 
-  },
-  complete: function(){
-    carregado+=1;
-    conf();
-  },
-  success: function(data){
-    console.log(data[0].url);
-    imagens=data;
-    console.log(imagens);
-  }
+},
+complete: function(){
+carregado+=1;
+conf();
+},
+success: function(data){
+console.log(data[0].url);
+imagens=data;
+console.log(imagens);
+}
 });
 $.ajax({
-  method: "GET",
-  url: "https://jsonplaceholder.typicode.com/posts?userId=1",
-  beforeSend: function(){
-    $('.load').css({display:"block"});
-  },
-  complete: function(){
-    carregado+=1;
-    conf();
-  },
-  success: function(data){
-    post=data;
-    console.log(post);
-  }
+method: "GET",
+url: "https://jsonplaceholder.typicode.com/posts?userId=1",
+beforeSend: function(){
+$('.load').css({display:"block"});
+},
+complete: function(){
+carregado+=1;
+conf();
+},
+success: function(data){
+post=data;
+console.log(post);
+}
 });
 $.ajax({
-  method: "GET",
-  url: "https://jsonplaceholder.typicode.com/users",
-  beforeSend: function(){
-    $('.load').css({display:"block"});
-  },
-  complete: function(){
-    carregado+=1;
-    conf();
-  },
-  success: function(data){
-    user=data;
-    console.log(user);
-  }
+method: "GET",
+url: "https://jsonplaceholder.typicode.com/users",
+beforeSend: function(){
+$('.load').css({display:"block"});
+},
+complete: function(){
+carregado+=1;
+conf();
+},
+success: function(data){
+user=data;
+console.log(user);
+}
 });
 
 $imagem = $_FILES["arquivo"]["tmp_name"];
@@ -207,22 +209,166 @@ $novopos->bindParam(':datc',$data);
 //$novopos->bindParam(':imgp',);
 $novopos->execute();
 if(isset($_FILES['arquivo'])){
-  $img=$_FILES['arquivo'];
-  if($img['error']){
-    die("erro ao salvar imagem");
-  }
-  $locals="img/";
-  $nome_img=uniqid();
-  $tipo=strtolower(pathinfo($img['name'],PATHINFO_EXTENSION));
-  if ($tipo != "jpg" && $tipo!= "png") {
-    die("formato de imagem nao permitida");
-  }
-  $locals=$locals . $nome_img . '.' . $tipo;
-  $img_ok= move_uploaded_file($img['tmp_name'],$locals);
+$img=$_FILES['arquivo'];
+if($img['error']){
+die("erro ao salvar imagem");
+}
+$locals="img/";
+$nome_img=uniqid();
+$tipo=strtolower(pathinfo($img['name'],PATHINFO_EXTENSION));
+if ($tipo != "jpg" && $tipo!= "png") {
+die("formato de imagem nao permitida");
+}
+$locals=$locals . $nome_img . '.' . $tipo;
+$img_ok= move_uploaded_file($img['tmp_name'],$locals);
 
-  if ($img_ok) {
-    $my_Insert_Statement = $my_Db_Connection->prepare("INSERT INTO arquivos (id_post,nome_arq,caminho) VALUES (:idp,:noar,:cam)");
-    $my_Insert_Statement->bindParam(':cam', $locals);
-    $my_Insert_Statement->bindParam(':noar', $nome_img);
-    $my_Insert_Statement->bindParam(':idp', $idpos);
-    $my_Insert_Statement->execute();
+if ($img_ok) {
+$my_Insert_Statement = $my_Db_Connection->prepare("INSERT INTO arquivos (id_post,nome_arq,caminho) VALUES (:idp,:noar,:cam)");
+$my_Insert_Statement->bindParam(':cam', $locals);
+$my_Insert_Statement->bindParam(':noar', $nome_img);
+$my_Insert_Statement->bindParam(':idp', $idpos);
+$my_Insert_Statement->execute();
+
+
+function getAjax(sk){
+$.ajax({
+method: "GET",
+url: "https://dummyjson.com/products?skip="+sk+"&limit=10",
+success: function(data){
+imagens=data.products;
+$.ajax({
+method: "GET",
+url: "https://dummyjson.com/posts?skip="+sk+"&limit=10",
+success: function(dat){
+post=dat.posts;
+$.ajax({
+method: "GET",
+url: "https://dummyjson.com/users?skip="+sk+"&limit=10",
+success: function(da){
+user=da.users;
+conf();
+}
+});
+}
+});
+}
+}
+);
+}
+
+
+<?php
+
+if(!isset($_SESSION)){
+  session_start();
+}
+//(isset($_GET['reqget']) || isset($_POST))
+if (isset($_SESSION['id_s']) && (isset($_POST)) ) {
+  ]//$req=(isset($_GET['reqget'])) ? $_GET['reqget'] : $_POST['reqpos'];
+  include "banco.php";
+  $sql_bus="SELECT * FROM users WHERE  id_session= ".$my_Db_Connection->quote($_SESSION['id_s'])." AND email_numero=".$my_Db_Connection->quote($_SESSION['emailnu']);
+  $bus = $my_Db_Connection->prepare($sql_bus);
+  $bus->execute();
+  $count = $bus->rowCount();
+  if ($count == 1) {
+    $result = $bus->fetch(PDO::FETCH_ASSOC);
+    // switch ($req) {
+    //   case '1':
+    //   echo json_encode($_SESSION['emailnu']);
+    //   break;
+    //   case '2':
+      $novopos=$my_Db_Connection->prepare('INSERT INTO postagem (id_post, nome, id_nome,tipo,body,date_post,img_perfil) VALUES (:idp, :nom, :idno,"p",:bod,:datc,:imgp)');
+      $idpos=uniqid().'p'.rand(1,1000).'p'.uniqid();
+      $novopos->bindParam(':idp',$idpos);
+      $novopos->bindParam(':nom',$result['nome']);
+      $novopos->bindParam(':idno',$result['id_nome']);
+      $body_tr=htmlspecialchars($_POST['texto']);
+      $novopos->bindParam(':bod',$body_tr);
+      //<script>console.log(1)</script>
+      $data = new DateTime();
+      $data=$data->format('Y/m/d H:i');
+      $novopos->bindParam(':datc',$data);
+      $novopos->bindParam(':imgp',$result['img_perfil']);
+      $novopos->execute();
+      if(isset($_FILES['arquivo'])){
+        for ($i=0; $i <count($_FILES['arquivo']['name']) ; $i++) {
+
+          $img=$_FILES['arquivo'];
+          if($img['error'][$i]){
+            die("erro ao salvar imagem");
+          }
+          $locals="arquivos/";
+          $nome_img=uniqid();
+          $tipo=strtolower(pathinfo($img['name'][$i],PATHINFO_EXTENSION));
+          if ($tipo != "jpg" && $tipo!= "png") {
+            die("formato de imagem nao permitida");
+          }
+          $locals=$locals . $nome_img . '.' . $tipo;
+          $img_ok= move_uploaded_file($img['tmp_name'][$i],$locals);
+
+          if ($img_ok) {
+            $my_Insert_Statement = $my_Db_Connection->prepare("INSERT INTO arquivos (id_post,nome_arq,caminho) VALUES (:idp,:noar,:cam)");
+            $my_Insert_Statement->bindParam(':cam', $locals);
+            $my_Insert_Statement->bindParam(':noar', $nome_img);
+            $my_Insert_Statement->bindParam(':idp', $idpos);
+            $my_Insert_Statement->execute();
+          }else {
+            die("erro ao salvar arquivo");
+          }
+        }
+      }
+
+
+
+    //   break;
+    // }
+  }else {
+    die("error");
+  }
+}
+?>
+
+
+$_SESSION['emailnu']=$result['email_numero'];
+$_SESSION['id_name']=$result['id_nome'];
+$_SESSION['nome']=$result['nome'];
+$_SESSION['imgper']=$result['img_perfil'];
+$_SESSION['idade']=$result['idade'];
+$_SESSION['diacadas']=$result['dia_cadastro'];
+
+$nome_se=["email_numero","id_nome","nome","img_perfil","idade","dia_cadastro"];
+for ($i=0; $i <count($nome_se) ; $i++) {
+  $_SESSION[$nome_se[$i]]=$result[$nome_se[$i]];
+}
+
+foreach ($cliente as $key => $value) {
+  $stmt->bindValue(":".$key, $value);
+}
+
+
+class Post{
+  public $id_post;
+  public $id_pessoa;
+  //public $nome;
+  //public $img_perfil;
+  public $arquivo;
+  public $texto;
+
+  public function __construct($id_post,$id_pessoa,$nome,$img_perfil,$arquivos,$texto){
+    $this->id_post=$id_post;
+    $this->id_pessoa=$id_pessoa;
+    //$this->nome=$nome;
+    //$this->img_perfil=$img_perfil;
+    if ($arquivos) {
+      for ($i=0; $i <count($arquivos) ; $i++) {
+        $this->arquivo[$i]=$arquivos[$i];
+      }
+    }
+
+    $this->texto=$texto;
+  }
+
+
+}
+
+$post=new Post($idpos,$result['id_nome'],$img2,$body_tr);

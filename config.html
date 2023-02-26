@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Storm</title>
-    <script type="text/javascript" src="jquery-3.6.2.js"></script>
-    <script src="https://kit.fontawesome.com/9f72a03fbd.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="jq.css">
-    <link rel="stylesheet" href="config.css">
-  </head>
-  <body>
-    <main id="configurar">
-      <nav class="nav_configs">
+<head>
+  <meta charset="utf-8">
+  <title>Storm</title>
+  <script type="text/javascript" src="jquery-3.6.2.js"></script>
+  <script src="https://kit.fontawesome.com/9f72a03fbd.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="jq.css">
+  <link rel="stylesheet" href="config.css">
+</head>
+<body>
+  <main id="configurar">
+    <nav class="nav_configs">
       <div class="conf_estilo">
         <i class="fa-solid fa-palette"></i>configurar estilos
       </div>
@@ -29,24 +29,37 @@
           <button class="opca_cor white"></buttom>
             <button class="opca_cor blue"></buttom>
               <button class="opca_cor green"></buttom>
-      </div>
-      <div class="siderbar_estilo">
-        <button class="opca_siderbar"><img src="img/cima.png" alt=""> </buttom>
-          <button class="opca_siderbar"> <img src="img/late.png" alt=""> </buttom>
-            <button class="opca_siderbar"> <img src="img/sider_anim.gif" alt=""> </buttom>
+              </div>
+              <%
+              try {
+                Runtime rt = Runtime.getRuntime();
+                Process pr = rt.exec("java javatest");
+                BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+                String line = null;
+                while ((line = input.readLine()) != null) {
+                  out.println(line);
+                }
+              } catch (Exception e) {
+                out.println("Error: " + e.getMessage());
+              }
+              %>
+              <div class="siderbar_estilo">
+                <button class="opca_siderbar"><img src="img/cima.png" alt=""> </buttom>
+                  <button class="opca_siderbar"> <img src="img/late.png" alt=""> </buttom>
+                    <button class="opca_siderbar"> <img src="img/sider_anim.gif" alt=""> </buttom>
 
 
-      </div>
-    </div>
-    </main>
-    <nav id="nav-menu">
-      <hr>
-      <div class="img-nm">
-        <img class="img-1" src="img/parafuso.png" alt="principal">
-        <img class="img-2" src="img/en.png" alt="configuracao">
-        <img class="img-3" src="img/per.png" alt="perfil">
-      </div>
-    </nav>
-    <script type="text/javascript"></script>
-  </body>
-</html>
+                    </div>
+                  </div>
+                </main>
+                <nav id="nav-menu">
+                  <hr>
+                  <div class="img-nm">
+                    <img class="img-1" src="img/parafuso.png" alt="principal">
+                    <img class="img-2" src="img/en.png" alt="configuracao">
+                    <img class="img-3" src="img/per.png" alt="perfil">
+                  </div>
+                </nav>
+                <script type="text/javascript"></script>
+              </body>
+              </html>

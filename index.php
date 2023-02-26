@@ -34,9 +34,9 @@ if(!isset($_SESSION)){
 
       <img class="img-1" src="img/per.png" name="ir_perfil" alt="perfil">
       <?php
-      if (isset($_SESSION['id_s'])){
+      if (isset($_SESSION['id_nome'])){
         echo '<div class="balao_perfil">
-        <a href="user.php" class="lin_perfil"><img class="usr_ft_per" src="'.$_SESSION['imgper'].'" alt=""><p>'.$_SESSION['nome'].'</p><p>@'.$_SESSION['id_name'].'</p></a>
+        <a href="user.php" class="lin_perfil"><img class="usr_ft_per" src="'.$_SESSION['img_perfil'].'" alt=""><p>'.$_SESSION['nome'].'</p><p>@'.$_SESSION['id_nome'].'</p></a>
         <div class="lin_sair">
         <hr>
         <a href="sair.php">
@@ -48,7 +48,7 @@ if(!isset($_SESSION)){
       <img class="img-2" src="img/parafuso.png" name="ir_home" alt="principal">
 
       <?php
-      if (isset($_SESSION['id_s'])){
+      if (isset($_SESSION['id_nome'])){
         echo '<nav class="opca">
         <button type="button" name="notifica"><i class="fa-solid fa-bell fa-lg"></i></button>
         <button type="button" name="escrever"><i class="fa-solid fa-pen-to-square fa-lg"></i></button>

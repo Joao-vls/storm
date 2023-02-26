@@ -2,77 +2,14 @@
 if(!isset($_SESSION)){
   session_start();
 }
-if (isset($_SESSION['idade'])) {
+if (isset($_SESSION['id_nome'])) {
   header("location:index.php");
 }
-function verica_valido($tam,$strin){
-  for ($i=0; $i <$tam ; $i++) {
-    if ($strin[$i]==" " || $strin[$i]==";" || $strin[$i]=="ç" || $strin[$i]=="<" || $strin[$i]==">" || $strin[$i]=="&" || $strin[$i]=='"') {
-      return 1;
-    }
-  }
-  return 0;
-}
-function verica_numero($number){
-  require_once 'vendor/autoload.php';
-  require_once 'vendor/twilio/sdk/src/Twilio/Rest/Client.php';
-  $sid = "AC0e6d5925842d1159fbd3571d999cf613";
-  $token = "d58f285d678b8ed24906900b6fbbc5fd";
-  $client = new Twilio\Rest\Client($sid, $token);
+include "validarcamposcad.php";
 
-  try {
-    $result = $client->lookups
-    ->phoneNumbers($number)
-    ->fetch(array("type" => "carrier"));
-    return 1;
-  } catch (Twilio\Exceptions\RestException $e) {
-    return 0;
-
-  }
-
-}
-if(isset($_POST['Cadast_id']) && $_POST['Cadast_id']!=""
-&& isset($_POST['Cadast_sen']) && $_POST['Cadast_sen']!=""
-&& isset($_POST['Cadast_nome']) && $_POST['Cadast_nome']!=""
-&& isset($_POST['Cadast_emainu']) && $_POST['Cadast_emainu']!=""
-&& isset($_POST['Cadast_conf_sen'])  &&  $_POST['Cadast_conf_sen']!=""
-&& isset($_POST['Cadast_idade']) && $_POST['Cadast_idade']!=""){
-  if ((verica_valido(strlen($_POST['Cadast_id']),$_POST['Cadast_id'])+verica_valido(strlen($_POST['Cadast_idade']),$_POST['Cadast_idade'])+
-  verica_valido(strlen($_POST['Cadast_nome']),$_POST['Cadast_nome'])+verica_valido(strlen($_POST['Cadast_emainu']),$_POST['Cadast_emainu']))) {
-    //die("1");
-    header("location:cadastro.php");
-  }
-  $email_nume = $_POST['Cadast_emainu'];
-  $if_email=0;
-  for ($i=0; $i <strlen($email_nume) ; $i++) {
-    if ($email_nume[$i]=="@") {
-      $if_email=1;
-    }
-  }
-  if (!$if_email) {
-    if(strlen($email_nume)>=8){
-      $email_nume="+" . $_POST['Cadast_emainu'];
-      if(!verica_numero($email_nume)){
-        //die("2");
-
-        header("location:cadastro.php");
-      }
-    }
-  }else {
-    if (!filter_var($email_nume, FILTER_VALIDATE_EMAIL)) {
-      //die("3");
-
-      header("location:cadastro.php");
-    }
-  }
-
-  if (strcmp($_POST['Cadast_conf_sen'],$_POST['Cadast_sen'])!=0) {
-    //die("4");
-
-    header("location:cadastro.php");
-  }
+if(validar_info()){
   include "banco.php";
-
+  $email_nume=$_POST['Cadast_emainu'];
   $id_name = $_POST['Cadast_id'];
   $sql_bus="SELECT * FROM users WHERE  id_nome= '".$id_name."' or email_numero='".$email_nume."'";
   $bus=$my_Db_Connection->prepare($sql_bus);
@@ -80,14 +17,16 @@ if(isset($_POST['Cadast_id']) && $_POST['Cadast_id']!=""
   if($bus->fetchColumn()){
     //die("4");
     header("location:cadastro.php");
+    exit();
   }
   $name = $_POST['Cadast_nome'];
   $senha = password_hash($_POST['Cadast_sen'],PASSWORD_DEFAULT);
   $idade = $_POST['Cadast_idade'];
+  date_default_timezone_set('America/Sao_Paulo');
   $data = new DateTime();
   $data=$data->format('Y/m/d H:i');
 
-  if(isset($_FILES['Cadast_img_perf'])){
+  if(isset($_FILES['Cadast_img_perf']) && $_FILES['Cadast_img_perf']['error'] === UPLOAD_ERR_OK){
     $img=$_FILES['Cadast_img_perf'];
     if($img['error']){
       die("erro ao salvar imagem");
@@ -118,9 +57,11 @@ if(isset($_POST['Cadast_id']) && $_POST['Cadast_id']!=""
   $my_Insert_Statement->bindParam(':datc', $data);
   if ($my_Insert_Statement->execute()) {
     header("location:login.php");
+    exit();
   } else {
     //die("6");
     header("location:cadastro.php");
+    exit();
   }
 }
 
@@ -163,7 +104,7 @@ if(isset($_POST['Cadast_id']) && $_POST['Cadast_id']!=""
                     <div class="form-outline mb-4">
                       <input type="text"  name="Cadast_emainu" class="form-control"
                       placeholder="coloque seu email ou numero" />
-                      <label class="form-label" for="Cadast_emainu">email numero</label>
+                      <label class="form-label" for="Cadast_emainu">email</label>
                     </div>
                     <div class="form-outline mb-4">
                       <input type="text"  name="Cadast_id" class="form-control"
@@ -179,7 +120,7 @@ if(isset($_POST['Cadast_id']) && $_POST['Cadast_id']!=""
                       <label class="form-label" for="Cadast_conf_sen">confirmar senha</label>
                     </div>
                     <div class="form-outline mb-4">
-                      <input type="number" name="Cadast_idade"  class="form-control" />
+                      <input type="date" name="Cadast_idade"  class="form-control" />
                       <label class="form-label" for="Cadast_idade">idade</label>
                     </div>
                     <div class="form-outline mb-4">

@@ -15,7 +15,7 @@ debounce = function(func, wait, immediate) {
 
 
 (function(){
-  var imagens,post,user,escrito='',move_lef_rig,usuarios=[],usuario=[];
+  var imagens=[],post,user,escrito='',move_lef_rig,usuarios=[],usuario=[];
 
 
   //console.log(users[0].src[0][1]);
@@ -155,7 +155,7 @@ debounce = function(func, wait, immediate) {
   }
 
   function criarEscrever(){
-    var div=$('<div id="novo-post"><form class=""id="formenviacont" method="post"> <textarea name="texto" placeholder="Escreva aqui..."></textarea><label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label><input name="arquivo[]" multiple id="enviar_imvi" type="file" accept="image/*" capture="user"><button type="submit" name="enviar" >Enviar</button> <button type="button" name="cancelar_envio" >Cancelar</button</form></div>');
+    var div=$('<div id="novo-post"><form class=""id="formenviacont" method="post"> <textarea name="texto" placeholder="Escreva aqui..."></textarea><label for="enviar_imvi"><i class="fa-sharp fa-solid fa-images"></i></label><input name="arquivos[]" multiple id="enviar_imvi" type="file" accept="image/*" capture="user"><button type="submit" name="enviar" >Enviar</button> <button type="button" name="cancelar_envio" >Cancelar</button</form></div>');
     $("body").append(div);
     if (escrito) {
       $("#novo-post textarea").val(escrito);
@@ -164,7 +164,6 @@ debounce = function(func, wait, immediate) {
       e.preventDefault();
       var recdata;
       var formData = new FormData(this);
-      formData.append('reqpos',"2");
       $.ajax({
         type: 'POST',
         url: 'GPvar.php',
@@ -175,16 +174,6 @@ debounce = function(func, wait, immediate) {
         success: function(data) {
           recdata = data;
           console.log(recdata);
-          $.ajax({
-            url: 'GPvar.php',
-            type: 'GET',
-            data: { reqget: "1"},
-            dataType:'json',
-            success: function(data) {
-              recdata=data;
-              console.log(recdata);
-            }
-          });
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(jqXHR, textStatus, errorThrown);
@@ -194,56 +183,56 @@ debounce = function(func, wait, immediate) {
 
     }
   );
-  $("#novo-post button").click(
-    function(){
-      if ($(this).attr('name')=="cancelar_envio") {
-        $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
-        $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
-        $("body").css({overflow:"auto"});
-        imagens.length=0;
-      }
-      if ($(this).attr('name')=="enviar") {
-        $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
-        $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
-        $("body").css({overflow:"auto"});
-        usuarios={
-          body:$("#novo-post textarea").val(),
-          imagem_p:"img/per.png",
-          username:"nome",
-          email:"@id",
-          src:imagens
-        }
-        usuario.push(usuarios);
-        criarConteudo(usuarios.imagem_p,usuarios.username,usuarios.email,usuarios.body,usuarios.src,1);
-        imagens.length=0;
-        criareventImageg();
-      }
-    }
-  );
-  $("#enviar_imvi").on("change", function() {
-    if (!( this.files && this.files.length<=4) || imagens.length==4) {
-      return;
-    }
+  // $("#novo-post button").click(
+  //   function(){
+  //     if ($(this).attr('name')=="cancelar_envio") {
+  //       $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
+  //       $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
+  //       $("body").css({overflow:"auto"});
+  //       imagens.length=0;
+  //     }
+  //     if ($(this).attr('name')=="enviar") {
+  //       $("#novo-post").effect( "drop", 450 ,()=>{$("#novo-post").remove()});
+  //       $(".sobre-tela").effect( "drop", 450 ,()=>{$(".sobre-tela").remove()});
+  //       $("body").css({overflow:"auto"});
+  //       usuarios={
+  //         body:$("#novo-post textarea").val(),
+  //         imagem_p:"img/per.png",
+  //         username:"nome",
+  //         email:"@id",
+  //         src:imagens
+  //       }
+  //       usuario.push(usuarios);
+  //       criarConteudo(usuarios.imagem_p,usuarios.username,usuarios.email,usuarios.body,usuarios.src,1);
+  //       imagens.length=0;
+  //       criareventImageg();
+  //     }
+  //   }
+  // );
+   $("#enviar_imvi").on("change", function() {
+     if (!( this.files && this.files.length<=4) || imagens.length==4) {
+       return;
+     }
 
-    if (this.files.length<=4) {
-      for (var i = 0; i <this.files.length ; i++) {
-        var r = new FileReader();
-        r.readAsDataURL(this.files[i]);
-        r.onload = function(e){
-          if (imagens.length<4) {
-            criarMostramid();
-            imagens.push(e.target.result);
-            var div=$('<img src="'+imagens[$(".mostra-midia").length-1]+'" alt="imagem_perfil">');
-            $(".mostra-midia:eq("+($(".mostra-midia").length-1)+")").append(div)
-          }
-        }
-      }
-    }
-  });
-  $( "#novo-post" ).effect( "slide", 450 );
+     if (this.files.length<=4) {
+       for (var i = 0; i <this.files.length ; i++) {
+         var r = new FileReader();
+         r.readAsDataURL(this.files[i]);
+         r.onload = function(e){
+           if (imagens.length<4) {
+             criarMostramid();
+             imagens.push(e.target.result);
+             var div=$('<img src="'+imagens[$(".mostra-midia").length-1]+'" alt="imagem_perfil">');
+             $(".mostra-midia:eq("+($(".mostra-midia").length-1)+")").append(div)
+           }
+         }
+       }
+     }
+   });
+  // $( "#novo-post" ).effect( "slide", 450 );
 }
 function carregaConteudo(){
-  if (imagens.length && user.length && post.length){
+  if (imagens?.length && user?.length && post?.length){
 
     for (var o = imagens.length - 1; o > 0; o--) {
       var j = Math.floor(Math.random() * o);
@@ -285,29 +274,16 @@ function conf(){
   $(".load").remove();
 }
 function getAjax(sk){
-  $.ajax({
-    method: "GET",
-    url: "https://dummyjson.com/products?skip="+sk+"&limit=10",
-    success: function(data){
-      imagens=data.products;
-      $.ajax({
-        method: "GET",
-        url: "https://dummyjson.com/posts?skip="+sk+"&limit=10",
-        success: function(dat){
-          post=dat.posts;
-          $.ajax({
-            method: "GET",
-            url: "https://dummyjson.com/users?skip="+sk+"&limit=10",
-            success: function(da){
-              user=da.users;
-              conf();
-            }
-          });
-        }
-      });
-    }
-  }
-);
+  conf();
+
+  // $.ajax({
+  //   method: "GET",
+  //   url: "http://localhost:3000/data",
+  //   dataType:"json",
+  //   success: function(data){
+  //     console.log(data);
+  //   }
+  // });
 }
 
 $(function(){
