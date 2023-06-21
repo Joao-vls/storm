@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 if (isset($_SESSION['id_nome'])) {
   header("location:index.php");
 }
-include "validarcamposcad.php";
+include "validarcampos.php";
 
 if(validar_info()){
   include "banco.php";
